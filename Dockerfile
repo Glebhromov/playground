@@ -42,6 +42,8 @@ ENV GO_BOOTSTRAP_VERSION ${GO_BOOTSTRAP_VERSION}
 # be published.
 RUN curl -sSL https://dl.google.com/go/$GO_BOOTSTRAP_VERSION.linux-amd64.tar.gz -o /tmp/go.tar.gz
 RUN curl -sSL https://dl.google.com/go/$GO_BOOTSTRAP_VERSION.linux-amd64.tar.gz.sha256 -o /tmp/go.tar.gz.sha256
+RUN ls -lh /tmp/go.tar.gz
+RUN ls -lh /tmp/go.tar.gz.sha256
 RUN mkdir -p $GOROOT_BOOTSTRAP
 RUN tar --strip=1 -C $GOROOT_BOOTSTRAP -vxzf /tmp/go.tar.gz
 
