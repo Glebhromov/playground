@@ -40,12 +40,10 @@ ENV GO_BOOTSTRAP_VERSION ${GO_BOOTSTRAP_VERSION}
 # Get a bootstrap version of Go for building GO_VERSION. At the time
 # of this Dockerfile being built, GO_VERSION's artifacts may not yet
 # be published.
-RUN curl -sSL https://dl.google.com/go/$GO_BOOTSTRAP_VERSION.linux-amd64.tar.gz -o /tmp/go.tar.gz
-RUN curl -sSL https://dl.google.com/go/$GO_BOOTSTRAP_VERSION.linux-amd64.tar.gz.sha256 -o /tmp/go.tar.gz.sha256
-RUN ls -lh /tmp/go.tar.gz
-RUN ls -lh /tmp/go.tar.gz.sha256
+RUN curl -sSL https://dl.google.com/go/go1.22.6.linux-amd64.tar.gz -o /tmp/go.tar.gz
+RUN curl -sSL https://dl.google.com/go/go1.22.6.linux-amd64.tar.gz.sha256 -o /tmp/go.tar.gz.sha256
+RUN echo "$(cat /tmp/go.tar.gz.sha256) /tmp/go.tar.gz" | sha256sum -c -
 RUN mkdir -p $GOROOT_BOOTSTRAP
-RUN chmod -R 755 $GOROOT_BOOTSTRAP
 RUN tar --strip=1 -C $GOROOT_BOOTSTRAP -vxzf /tmp/go.tar.gz
 
 RUN mkdir /gocache
@@ -115,4 +113,3 @@ WORKDIR /app
 
 EXPOSE 8080
 ENTRYPOINT ["/app/playground"]
-
