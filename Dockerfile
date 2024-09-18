@@ -45,6 +45,7 @@ RUN curl -sSL https://dl.google.com/go/$GO_BOOTSTRAP_VERSION.linux-amd64.tar.gz.
 RUN ls -lh /tmp/go.tar.gz
 RUN ls -lh /tmp/go.tar.gz.sha256
 RUN mkdir -p $GOROOT_BOOTSTRAP
+RUN chmod -R 755 $GOROOT_BOOTSTRAP
 RUN tar --strip=1 -C $GOROOT_BOOTSTRAP -vxzf /tmp/go.tar.gz
 
 RUN mkdir /gocache
